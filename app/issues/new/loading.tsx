@@ -1,10 +1,14 @@
+import { Box } from '@radix-ui/themes'
+import { Skeleton } from '@/app/components'
 
-import React from 'react'
 
-const LoadingNewPage = () => {
+const LoadingNewIssuePage = () => {
     return (
-        <div>Loading...</div>
+        <Box className='max-w-xl'>
+            <Skeleton />
+            <Skeleton height='20rem' />
+        </Box>
     )
 }
 
-export default LoadingNewPage
+export default LoadingNewIssuePage
