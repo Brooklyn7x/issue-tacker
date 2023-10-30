@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createIssueSchema } from '@/app/validateSchema';
+import { createIssueSchema } from '@/app/createIssueSchema';
 import { z } from 'zod';
 import ErrorMessage from '@/app/components/ErrorMessage';
 import Spinner from '@/app/components/Spinner';
@@ -32,8 +32,12 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     const onSubmit = async (data: IssueFormData) => {
         try {
             setIsSumit(true)
-            await axios.post('/api/issues', data);
-            router.push('/issues');
+            if (issue)
+                await axios.patch('/api/issues/' + issue?.id, data)
+            else
+                await axios.post('/api/issues', data);
+                router.refresh()
+                router.push('/issues');
         } catch (error) {
             setIsSumit(false)
             setError('SomeThing went wrong.')
@@ -57,7 +61,8 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
                         <SimpleMDE placeholder='Description' {...field} />)}
                 />
                 <ErrorMessage>{errors.description?.message}</ErrorMessage>
-                <Button disabled={issumit}>Sumbit New Issue{issumit && <Spinner />}</Button>
+                <Button disabled={issumit}>
+                    {issue ? 'Update Issue' : 'Sumbit New Issue'}{''}{issumit && <Spinner />}</Button>
             </form>
         </div>
     )
