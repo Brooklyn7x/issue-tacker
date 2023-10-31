@@ -40,7 +40,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
                 router.push('/issues');
         } catch (error) {
             setIsSumit(false)
-            setError('SomeThing went wrong.')
+            setError('Something went wrong.')
         }
     };
     return (
