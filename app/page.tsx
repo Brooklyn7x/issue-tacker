@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import Pagination from './components/Pagination'
+
 import LastestIssues from './LastestIssues'
 import IssuesSummary from './IssuesSummary'
 import prisma from '@/prisma/client'
