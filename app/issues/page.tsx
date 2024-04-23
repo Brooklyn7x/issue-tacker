@@ -6,6 +6,7 @@ import IssueActions from "./IssueActions";
 import { Issue, Status } from "@prisma/client";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 import Pagination from "../components/Pagination";
+import { useState } from "react";
 
 interface Props {
   searchParams: {
@@ -36,11 +37,12 @@ const IssuePage = async ({ searchParams }: Props) => {
     : undefined;
 
   const where = { status };
-  
+  const sort = "asc" ? "desc" : "asc";
+
   const orderBy = columns
     .map((columns) => columns.value)
     .includes(searchParams.orderBy)
-    ? { [searchParams.orderBy]: "asc" }
+    ? { [searchParams.orderBy]: sort }
     : undefined;
 
   const page = parseInt(searchParams.page) || 1;

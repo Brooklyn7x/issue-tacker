@@ -14,20 +14,18 @@ import {
   Text,
 } from "@radix-ui/themes";
 import { Skeleton } from "@/app/components";
-import { ToastIcon } from "react-hot-toast";
 import { RocketIcon } from "@radix-ui/react-icons";
+import Logo from "./components/Logo";
 
 const NavBar = () => {
   return (
     <nav className="border-b mb-5 py-3 px-5">
       <Container>
-        <Flex justify="between">
-          <Flex align="center" gap="3">
-            <Link href="/">
-              <RocketIcon />
-            </Link>
-            <NavLink />
-          </Flex>
+        <Flex justify="between" align="center">
+          <Link href="/">
+            <Logo />
+          </Link>
+          <NavLink />
           <AuthStatus />
         </Flex>
       </Container>
@@ -52,7 +50,7 @@ const AuthStatus = () => {
           <Avatar
             src={session!.user!.image!}
             fallback="?"
-            size="3"
+            size="2"
             radius="medium"
             className="cursor-pointer"
             referrerPolicy="no-referrer"
